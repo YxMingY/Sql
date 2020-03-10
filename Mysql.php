@@ -2,18 +2,25 @@
 
 
 namespace yxmingy;
-
+require_once "Table.php";
 
 use mysqli;
 
 class Mysql extends mysqli {
+	private $connected = false;
 	public function __construct($host, $user, $pass, $db) {
 		parent::__construct($host, $user, $pass, $db);
 
-		if (mysqli_connect_error()) {
-			die('Connect Error (' . mysqli_connect_errno() . ') '
-				. mysqli_connect_error());
-		}
+		if (!mysqli_connect_error())
+			$this->connected = true;
+	}
+	public function connected():bool
+	{
+		return $this->connected;
+	}
+	public function getConnectError():string
+	{
+		return 'Connect Error ('.mysqli_connect_errno().') '. mysqli_connect_error();
 	}
 	public function setUTF8():bool
 	{
