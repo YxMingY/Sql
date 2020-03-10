@@ -42,10 +42,10 @@ class Mysql extends mysqli {
 	{
 		return $this->query("DROP TABLE $name");
 	}
-	public function select(string $colomn, string $table, string $where = NULL):?array
+	public function select(string $table, string $colomn, string $where = NULL):?array
 	{
 		$rows = [];
-		if($this->q_query($res,"SELECT $colomn FROM $table".($where==NULL ? "" : "WHERE $where"))) {
+		if($this->q_query($res,"SELECT $colomn FROM $table".($where==NULL ? "" : " WHERE $where"))) {
 			while ($row = $res->fetch_assoc()) {
 				$rows[] = $row;
 			}
