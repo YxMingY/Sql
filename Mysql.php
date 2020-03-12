@@ -68,7 +68,7 @@ class Mysql extends mysqli {
 	}
 	public function a_insert(string $table,array $keys,array $values):bool
 	{
-		return $this->insert($table,implode(" ",$keys),implode(" ",$values));
+		return $this->insert($table,implode(", ",$keys),'\''.implode("', '",$values).'\'');
 	}
 	public function show(string $what):?array
 	{
@@ -83,7 +83,7 @@ class Mysql extends mysqli {
 			return NULL;
 		}
 	}
-	public function showSingle(string $what):?array
+	public function showOne(string $what):?array
 	{
 		$rows = [];
 		if($this->q_query($res,"SHOW $what")) {
