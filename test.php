@@ -1,11 +1,19 @@
 <?php
 require_once "Mysql.php";
 use yxmingy\Mysql;
-$db = new Mysql('rm-m5e936c6x8o4g3q3buo.mysql.rds.aliyuncs.com',  'ndt_001', 'aqi275466_', 'tnb');
-
+$db = new Mysql('localhost',  'user', 'passwd', 'database');
+if(!$db->connected()){
+	die($db->getConnectError());
+}
 echo 'Success... ' . $db->host_info . "\n";
+$table = "mp_user";
+if(!$db->insert($table,[
+	"nick" => "test2",
+	"pwd" => "123456",
+	"email" => "test2@qq.com",
+	"state" => "0",
+	"captcha" => "wtf"
+])) echo($db->getStmtError().PHP_EOL);
+var_dump($db->selectById($table,"email","nick","test2"));
 
-var_dump($db->select("用户基本信息","姓名","账号='27004'"));
-$db->update("用户基本信息","账号='27004'","姓名='emm'");
-var_dump($db->select("用户基本信息","姓名","账号='27004'"));
 $db->close();
