@@ -167,7 +167,10 @@ class Mysql extends mysqli {
 	{
 		return $this->query("DELETE FROM $table WHERE $where");
 	}
-
+	public function deleteAll(string $table):bool
+	{
+		return $this->query("DELETE FROM $table");
+	}
 	public function createDatabase(string $name):bool
 	{
 		return $this->query("CREATE DATABASE $name");
