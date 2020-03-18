@@ -103,7 +103,8 @@ class Mysql extends mysqli {
 		if($this->safeQueryResult(
 			$res,
 			"SELECT $colomn FROM $table WHERE $id_field_name=?",
-			is_int($check_equal_value) ? "i" : "s",$check_equal_value)
+			is_int($check_equal_value) ? "i" : "s",
+			$check_equal_value)
 		  ) {
 			while ($row = $res->fetch_assoc()) {
 				$rows[] = $row;
