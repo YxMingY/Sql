@@ -100,7 +100,11 @@ class Mysql extends mysqli {
 	public function selectById(string $table, string $colomn, string $id_field_name, $check_equal_value):?array
 	{
 		$rows = [];
-		if($this->safeQueryResult($res,"SELECT $colomn FROM $table WHERE $id_field_name=?",is_int($check_equal_value) ? "i" : "s",$check_equal_value)) {
+		if($this->safeQueryResult(
+			$res,
+			"SELECT $colomn FROM $table WHERE $id_field_name=?",
+			is_int($check_equal_value) ? "i" : "s",$check_equal_value)
+		  ) {
 			while ($row = $res->fetch_assoc()) {
 				$rows[] = $row;
 			}
